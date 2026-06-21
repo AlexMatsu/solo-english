@@ -123,12 +123,12 @@
 
   /* padding lateral = metade do espaço livre, pra QUALQUER card (1º/último
      inclusive) conseguir centralizar na tela ao dar snap */
-  .journey { padding: 4px 14% 18px; }
+  .journey,
   .testi-grid,
   .plans { padding: 4px 9% 18px; }
 
-  .journey .jstep { flex: 0 0 72%; max-width: 72%; scroll-snap-align: center; }
-  .testi-grid figure { flex: 0 0 82%; max-width: 82%; scroll-snap-align: center; }
+  .journey .jstep,
+  .testi-grid figure,
   .plans > .panel { flex: 0 0 82%; max-width: 82%; scroll-snap-align: center; }
 
   .jsep { display: none; }
