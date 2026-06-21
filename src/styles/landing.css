@@ -129,7 +129,11 @@
 
   .journey .jstep,
   .testi-grid figure,
-  .plans > .panel { flex: 0 0 82%; max-width: 82%; scroll-snap-align: center; }
+  .plans > .panel {
+    flex: 0 0 82%; max-width: 82%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always; /* trava em 1 card por deslize, não pula vários */
+  }
 
   .jsep { display: none; }
 }
