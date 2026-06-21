@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 128 128" role="img" aria-label="Primeira Missao">
+<defs><linearGradient id="g" x1="10" y1="10" x2="118" y2="118"><stop offset="0" stop-color="#E9D5FF"/><stop offset=".38" stop-color="#A855F7"/><stop offset=".72" stop-color="#7C3AED"/><stop offset="1" stop-color="#3B0764"/></linearGradient><linearGradient id="s" x1="20" y1="108" x2="108" y2="20"><stop offset="0" stop-color="#21002F"/><stop offset="1" stop-color="#111827"/></linearGradient><filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3" result="blur"/><feColorMatrix in="blur" type="matrix" values="0.65 0 0 0 0.45 0 0.28 0 0 0.08 0 0 1 0 1 0 0 0 1 0" result="purple"/><feMerge><feMergeNode in="purple"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<rect width="128" height="128" rx="18" fill="#05030A"/>
+<g opacity=".9"><path d="M64 8 112 36v56l-48 28-48-28V36L64 8Z" fill="url(#s)" stroke="#8B5CF6" stroke-width="2"/><path d="M64 17 104 40v48l-40 23-40-23V40l40-23Z" fill="none" stroke="#C084FC" stroke-width="1" opacity=".75"/><path d="M64 2 120 34v60l-56 32L8 94V34L64 2Z" fill="none" stroke="#6D28D9" stroke-width="1" opacity=".35"/></g>
+<g><path d="M89 25 56 77M48 85l-10 10M48 85l-12-12M48 85l12 12M56 77l-5-5" stroke="url(#g)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glow)"/>
+<path d="M84 24l15 5-10 11Z" fill="url(#g)" filter="url(#glow)"/></g>
+</svg>

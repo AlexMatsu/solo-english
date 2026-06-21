@@ -2,25 +2,33 @@
 
 import Link from "next/link";
 import { useState } from "react";
-
-const LINKS = [
-  { href: "#inicio", label: "Início", active: true },
-  { href: "#como", label: "Como funciona" },
-  { href: "#recursos", label: "Recursos" },
-  { href: "#depoimentos", label: "Depoimentos" },
-  { href: "#planos", label: "Planos" },
-  { href: "#faq", label: "FAQ" },
-];
+import LangSwitcher from "@/components/LangSwitcher";
+import { useT } from "@/i18n/LangContext";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const t = useT();
+
+  const LINKS = [
+    { href: "#inicio", label: t.nav.inicio, active: true },
+    { href: "#como", label: t.nav.como },
+    { href: "#recursos", label: t.nav.recursos },
+    { href: "#depoimentos", label: t.nav.depoimentos },
+    { href: "#planos", label: t.nav.planos },
+    { href: "#faq", label: t.nav.faq },
+  ];
 
   return (
     <header className="nav">
       <div className="wrap nav-inner">
         <Link href="/" className="logo">
-          SOLO<br />
-          <span className="r">ENGLISH</span>
+          <span className="logo-full">
+            SOLO<br />
+            <span className="r">ENGLISH</span>
+          </span>
+          <span className="logo-mini" aria-hidden="true">
+            S<span className="r">E</span>
+          </span>
         </Link>
 
         <nav className="nav-links" style={open ? { display: "flex" } : undefined}>
@@ -32,11 +40,12 @@ export default function Navbar() {
         </nav>
 
         <div className="nav-cta">
+          <LangSwitcher />
           <Link href="/login" className="btn ghost">
-            Entrar
+            {t.nav.entrar}
           </Link>
-          <Link href="/cadastro" className="btn primary">
-            Começar agora
+          <Link href="/cadastro" className="btn primary btn-bolt">
+            <span className="btn-bolt-label">{t.nav.comecar}</span>
           </Link>
         </div>
 

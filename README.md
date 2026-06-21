@@ -1,6 +1,6 @@
 # Solo English
 
-Plataforma de inglês **gamificada** com estética anime (estilo *Solo Leveling*) — estudo de UX/UI.
+Plataforma de inglês **gamificada** com estética anime (estilo *Solo Leveling*) — o
 Aprender inglês vira uma jornada de RPG: missões diárias, XP, ranking, bosses e recompensas.
 
 Migrado de páginas HTML estáticas para **Next.js (App Router + TypeScript)**.

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import BgLayers from "@/components/BgLayers";
+import { LanguageProvider } from "@/i18n/LangContext";
 
 export const metadata: Metadata = {
   title: "Solo English — Transforme seu inglês no seu maior poder",
@@ -16,8 +17,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body>
-        <BgLayers />
-        {children}
+        <LanguageProvider>
+          <BgLayers />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

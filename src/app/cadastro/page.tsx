@@ -77,6 +77,7 @@ export default function CadastroPage() {
   const [senhaErr, setSenhaErr] = useState<string | null>(null);
   const [termosErr, setTermosErr] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [pendingEmail, setPendingEmail] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const strength = strengthState(senha);
@@ -87,6 +88,7 @@ export default function CadastroPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSuccess(false);
+    setPendingEmail(null);
     let ok = true;
 
     if (nome.trim().length < 2) {
@@ -135,11 +137,17 @@ export default function CadastroPage() {
       return;
     }
 
+    // Com a confirmação de e-mail ligada, o Supabase não retorna erro para um
+    // e-mail já existente (proteção anti-enumeração) — ele devolve um usuário
+    // "fantasma" com identities vazio. Detectamos isso para avisar com clareza.
+    if (data.user && data.user.identities && data.user.identities.length === 0) {
+      setEmailErr("Este e-mail já foi cadastrado. Tente entrar.");
+      return;
+    }
+
     // Se a confirmação de e-mail estiver ligada no Supabase, não há sessão ainda.
     if (!data.session) {
-      setEmailErr(
-        "Conta criada! Confirme pelo link enviado ao seu e-mail e depois entre."
-      );
+      setPendingEmail(email.trim().toLowerCase());
       return;
     }
 
@@ -275,6 +283,57 @@ export default function CadastroPage() {
       {/* Formulário */}
       <section className="auth-main">
         <div className="auth-card">
+          {pendingEmail ? (
+            <div className="confirm-mail" role="status" aria-live="polite">
+              <div className="confirm-mail-orb">
+                <span className="confirm-mail-ring" aria-hidden="true"></span>
+                <span className="confirm-mail-ring delay" aria-hidden="true"></span>
+                <span className="confirm-mail-icon" aria-hidden="true">
+                  ✉️
+                </span>
+                <span className="confirm-mail-check" aria-hidden="true">
+                  ✓
+                </span>
+              </div>
+              <h1 style={{ marginTop: 6 }}>
+                Conta <span className="r">criada!</span>
+              </h1>
+              <p className="sub" style={{ marginBottom: 18 }}>
+                Falta só <b>1 passo</b> para despertar seu poder.
+              </p>
+              <div className="confirm-mail-box">
+                <p style={{ margin: 0 }}>
+                  Enviamos um link de confirmação para
+                </p>
+                <p className="confirm-mail-addr">{pendingEmail}</p>
+                <p style={{ margin: "10px 0 0", color: "var(--muted)", fontSize: 14 }}>
+                  Abra seu e-mail e clique em <b>confirmar</b> — depois é só
+                  entrar e começar a jornada. ⚔️
+                </p>
+              </div>
+              <p
+                style={{
+                  margin: "14px 0 0",
+                  color: "var(--muted)",
+                  fontSize: 13,
+                }}
+              >
+                Não recebeu? Olhe a caixa de <b>spam</b> ou{" "}
+                <button
+                  type="button"
+                  className="linklike"
+                  onClick={() => setPendingEmail(null)}
+                >
+                  tente outro e-mail
+                </button>
+                .
+              </p>
+              <Link href="/login" className="btn block lg" style={{ marginTop: 22 }}>
+                Já confirmei — entrar <span className="arrow">→</span>
+              </Link>
+            </div>
+          ) : (
+            <>
           <h1>
             Comece sua <span className="r">jornada</span>
           </h1>
@@ -436,6 +495,8 @@ export default function CadastroPage() {
           <p className="auth-foot">
             Já tem conta? <Link href="/login">Entrar</Link>
           </p>
+            </>
+          )}
         </div>
       </section>
     </main>

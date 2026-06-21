@@ -1,0 +1,392 @@
+export type Lang = "pt" | "en" | "es";
+
+const pt = {
+  nav: {
+    inicio: "Início",
+    como: "Como funciona",
+    recursos: "Recursos",
+    depoimentos: "Depoimentos",
+    planos: "Planos",
+    faq: "FAQ",
+    entrar: "Entrar",
+    comecar: "Começar agora",
+  },
+  hero: {
+    eyebrow: "Desperte seu potencial",
+    titleA: "Transforme seu",
+    titleB: "inglês em seu",
+    titleHi: "maior poder.",
+    subtitle:
+      "Domine conversação, vocabulário e compreensão de forma natural através de um sistema de progressão inspirado nos melhores RPGs e animes.",
+    ctaStart: "Começar jornada",
+    trailer: "Assistir trailer",
+    advNum: "+50.000 aventureiros",
+    advText: "já evoluindo o inglês!",
+  },
+  journey: {
+    eyebrow: "Sua jornada",
+    titlePre: "Sua jornada de",
+    titleHi: "evolução",
+    steps: [
+      { t: "Escolha sua classe", d: "Defina seu caminho e desperte habilidades únicas de aprendizado." },
+      { t: "Complete missões", d: "Exercícios de vocabulário, gramática, listening e speaking." },
+      { t: "Ganhe XP", d: "Cada missão te deixa mais forte. Ganhe XP, Gold e itens." },
+      { t: "Suba de nível", d: "Desbloqueie novos mundos, habilidades e recompensas épicas." },
+    ],
+  },
+  progression: { titlePre: "Sistema de", titleHi: "progressão" },
+  rewards: {
+    titlePre: "Recompensas",
+    titleHi: "épicas",
+    subtitle: "Quanto mais você aprende, mais forte você fica.",
+    items: ["Avatares", "Skins", "Títulos", "Molduras", "Emotes", "Armas", "Mascotes", "E mais"],
+    cta: "Ver loja",
+  },
+  ranking: {
+    titlePre: "Ranking",
+    titleHi: "mundial",
+    tabs: ["XP semanal", "Streak", "Pronúncia"],
+    tiers: ["Lendário", "Mestre", "Diamante", "Rubi", "Ouro"],
+    cta: "Ver ranking completo",
+  },
+  missions: {
+    titlePre: "Missões",
+    titleHi: "diárias",
+    streak: "🔥 Sequência de 7 dias",
+    items: [
+      "Aprenda 10 palavras",
+      "Complete um listening",
+      "Faça um exercício de speaking",
+      "Mantenha a sequência",
+    ],
+  },
+  testi: {
+    titlePre: "Aventureiros reais,",
+    titleHi: "resultados reais",
+    level: "Nível",
+    quotes: [
+      "Passei de básico para intermediário em 6 meses! O sistema de missões me mantém motivado todos os dias.",
+      "O melhor método que já usei! Aprendo jogando, completo missões todos os dias e me divirto demais enquanto evoluo de verdade.",
+      "A temática anime me conquistou. Hoje não fico um dia sequer sem completar minhas missões!",
+    ],
+  },
+  plans: {
+    eyebrow: "Escolha seu pacto",
+    titlePre: "Comece grátis,",
+    titleHi: "evolua sem limites",
+    perMonth: "/mês",
+    popular: "Mais popular",
+    eliteTag: "Elite",
+    aprendiz: {
+      name: "Aprendiz",
+      features: ["1 missão por dia", "Vocabulário essencial", "Ranking e ofensiva", "Avatar básico"],
+      cta: "Começar grátis",
+    },
+    cacador: {
+      name: "Caçador",
+      features: [
+        "Missões ilimitadas",
+        "Tutor de IA 24h (speaking)",
+        "Sem anúncios + modo offline",
+        "Skins, títulos e molduras exclusivas",
+        "Acesso a guildas e eventos",
+      ],
+      cta: "Despertar poder",
+    },
+    monarca: {
+      name: "Monarca",
+      features: [
+        "Tudo do Caçador, sem limites",
+        "Sessões 1:1 com tutor humano",
+        "Trilha personalizada por IA",
+        "Certificado de proficiência",
+        "Ranking de elite e eventos VIP",
+        "Suporte prioritário 24h",
+      ],
+      cta: "Ascender ao trono",
+    },
+  },
+  cta: {
+    titlePre: "Está pronto para",
+    titleHi: "despertar seu poder?",
+    subtitle: "Junte-se a milhares de aventureiros e domine o inglês de forma épica.",
+    button: "Começar minha jornada",
+  },
+  feat: [
+    { t: "Método gamificado", d: "Aprenda jogando com missões e desafios." },
+    { t: "Conteúdo de qualidade", d: "Aulas criadas por especialistas em idiomas." },
+    { t: "Comunidade ativa", d: "Guildas, chat e eventos todos os dias." },
+    { t: "Seguro e confiável", d: "Seus dados protegidos com segurança total." },
+  ],
+  footer: {
+    tagline: "Sua jornada épica para dominar o inglês começa aqui.",
+    columns: [
+      { title: "Conteúdo", links: ["Como funciona", "Missões", "Recursos", "Planos", "FAQ"] },
+      { title: "Comunidade", links: ["Guildas", "Ranking", "Eventos", "Blog"] },
+      { title: "Suporte", links: ["Central de ajuda", "Contato", "Termos de uso", "Privacidade"] },
+    ],
+    rights: "© 2026 Solo English. Todos os direitos reservados.",
+  },
+};
+
+export type Dict = typeof pt;
+
+const en: Dict = {
+  nav: {
+    inicio: "Home",
+    como: "How it works",
+    recursos: "Features",
+    depoimentos: "Reviews",
+    planos: "Plans",
+    faq: "FAQ",
+    entrar: "Sign in",
+    comecar: "Get started",
+  },
+  hero: {
+    eyebrow: "Unleash your potential",
+    titleA: "Turn your",
+    titleB: "English into your",
+    titleHi: "greatest power.",
+    subtitle:
+      "Master conversation, vocabulary and comprehension naturally through a progression system inspired by the best RPGs and anime.",
+    ctaStart: "Start journey",
+    trailer: "Watch trailer",
+    advNum: "+50,000 adventurers",
+    advText: "already leveling up their English!",
+  },
+  journey: {
+    eyebrow: "Your journey",
+    titlePre: "Your journey of",
+    titleHi: "evolution",
+    steps: [
+      { t: "Choose your class", d: "Define your path and unlock unique learning skills." },
+      { t: "Complete missions", d: "Vocabulary, grammar, listening and speaking exercises." },
+      { t: "Earn XP", d: "Every mission makes you stronger. Earn XP, Gold and items." },
+      { t: "Level up", d: "Unlock new worlds, skills and epic rewards." },
+    ],
+  },
+  progression: { titlePre: "Progression", titleHi: "system" },
+  rewards: {
+    titlePre: "Epic",
+    titleHi: "rewards",
+    subtitle: "The more you learn, the stronger you get.",
+    items: ["Avatars", "Skins", "Titles", "Frames", "Emotes", "Weapons", "Pets", "And more"],
+    cta: "View store",
+  },
+  ranking: {
+    titlePre: "Global",
+    titleHi: "ranking",
+    tabs: ["Weekly XP", "Streak", "Pronunciation"],
+    tiers: ["Legend", "Master", "Diamond", "Ruby", "Gold"],
+    cta: "View full ranking",
+  },
+  missions: {
+    titlePre: "Daily",
+    titleHi: "missions",
+    streak: "🔥 7-day streak",
+    items: [
+      "Learn 10 words",
+      "Complete a listening",
+      "Do a speaking exercise",
+      "Keep your streak",
+    ],
+  },
+  testi: {
+    titlePre: "Real adventurers,",
+    titleHi: "real results",
+    level: "Level",
+    quotes: [
+      "I went from basic to intermediate in 6 months! The mission system keeps me motivated every day.",
+      "The best method I've ever used! I learn by playing, complete missions every day and have a blast while actually leveling up.",
+      "The anime theme won me over. Now I don't go a single day without completing my missions!",
+    ],
+  },
+  plans: {
+    eyebrow: "Choose your pact",
+    titlePre: "Start free,",
+    titleHi: "evolve without limits",
+    perMonth: "/mo",
+    popular: "Most popular",
+    eliteTag: "Elite",
+    aprendiz: {
+      name: "Apprentice",
+      features: ["1 mission per day", "Essential vocabulary", "Ranking and streak", "Basic avatar"],
+      cta: "Start free",
+    },
+    cacador: {
+      name: "Hunter",
+      features: [
+        "Unlimited missions",
+        "24/7 AI tutor (speaking)",
+        "No ads + offline mode",
+        "Exclusive skins, titles and frames",
+        "Access to guilds and events",
+      ],
+      cta: "Unleash power",
+    },
+    monarca: {
+      name: "Monarch",
+      features: [
+        "Everything in Hunter, no limits",
+        "1:1 sessions with a human tutor",
+        "AI-personalized path",
+        "Proficiency certificate",
+        "Elite ranking and VIP events",
+        "Priority support 24/7",
+      ],
+      cta: "Ascend the throne",
+    },
+  },
+  cta: {
+    titlePre: "Are you ready to",
+    titleHi: "unleash your power?",
+    subtitle: "Join thousands of adventurers and master English epically.",
+    button: "Start my journey",
+  },
+  feat: [
+    { t: "Gamified method", d: "Learn by playing with missions and challenges." },
+    { t: "Quality content", d: "Lessons created by language experts." },
+    { t: "Active community", d: "Guilds, chat and events every day." },
+    { t: "Safe and reliable", d: "Your data protected with total security." },
+  ],
+  footer: {
+    tagline: "Your epic journey to master English starts here.",
+    columns: [
+      { title: "Content", links: ["How it works", "Missions", "Features", "Plans", "FAQ"] },
+      { title: "Community", links: ["Guilds", "Ranking", "Events", "Blog"] },
+      { title: "Support", links: ["Help center", "Contact", "Terms of use", "Privacy"] },
+    ],
+    rights: "© 2026 Solo English. All rights reserved.",
+  },
+};
+
+const es: Dict = {
+  nav: {
+    inicio: "Inicio",
+    como: "Cómo funciona",
+    recursos: "Recursos",
+    depoimentos: "Opiniones",
+    planos: "Planes",
+    faq: "FAQ",
+    entrar: "Entrar",
+    comecar: "Empezar ahora",
+  },
+  hero: {
+    eyebrow: "Despierta tu potencial",
+    titleA: "Transforma tu",
+    titleB: "inglés en tu",
+    titleHi: "mayor poder.",
+    subtitle:
+      "Domina conversación, vocabulario y comprensión de forma natural a través de un sistema de progresión inspirado en los mejores RPGs y animes.",
+    ctaStart: "Comenzar jornada",
+    trailer: "Ver tráiler",
+    advNum: "+50.000 aventureros",
+    advText: "¡ya mejorando su inglés!",
+  },
+  journey: {
+    eyebrow: "Tu jornada",
+    titlePre: "Tu jornada de",
+    titleHi: "evolución",
+    steps: [
+      { t: "Elige tu clase", d: "Define tu camino y despierta habilidades únicas de aprendizaje." },
+      { t: "Completa misiones", d: "Ejercicios de vocabulario, gramática, listening y speaking." },
+      { t: "Gana XP", d: "Cada misión te hace más fuerte. Gana XP, Gold y objetos." },
+      { t: "Sube de nivel", d: "Desbloquea nuevos mundos, habilidades y recompensas épicas." },
+    ],
+  },
+  progression: { titlePre: "Sistema de", titleHi: "progresión" },
+  rewards: {
+    titlePre: "Recompensas",
+    titleHi: "épicas",
+    subtitle: "Cuanto más aprendes, más fuerte te vuelves.",
+    items: ["Avatares", "Skins", "Títulos", "Marcos", "Emotes", "Armas", "Mascotas", "Y más"],
+    cta: "Ver tienda",
+  },
+  ranking: {
+    titlePre: "Ranking",
+    titleHi: "mundial",
+    tabs: ["XP semanal", "Racha", "Pronunciación"],
+    tiers: ["Leyenda", "Maestro", "Diamante", "Rubí", "Oro"],
+    cta: "Ver ranking completo",
+  },
+  missions: {
+    titlePre: "Misiones",
+    titleHi: "diarias",
+    streak: "🔥 Racha de 7 días",
+    items: [
+      "Aprende 10 palabras",
+      "Completa un listening",
+      "Haz un ejercicio de speaking",
+      "Mantén la racha",
+    ],
+  },
+  testi: {
+    titlePre: "Aventureros reales,",
+    titleHi: "resultados reales",
+    level: "Nivel",
+    quotes: [
+      "¡Pasé de básico a intermedio en 6 meses! El sistema de misiones me mantiene motivado todos los días.",
+      "¡El mejor método que he usado! Aprendo jugando, completo misiones todos los días y me divierto muchísimo mientras evoluciono de verdad.",
+      "La temática anime me conquistó. ¡Hoy no paso ni un solo día sin completar mis misiones!",
+    ],
+  },
+  plans: {
+    eyebrow: "Elige tu pacto",
+    titlePre: "Empieza gratis,",
+    titleHi: "evoluciona sin límites",
+    perMonth: "/mes",
+    popular: "Más popular",
+    eliteTag: "Elite",
+    aprendiz: {
+      name: "Aprendiz",
+      features: ["1 misión por día", "Vocabulario esencial", "Ranking y racha", "Avatar básico"],
+      cta: "Empezar gratis",
+    },
+    cacador: {
+      name: "Cazador",
+      features: [
+        "Misiones ilimitadas",
+        "Tutor de IA 24h (speaking)",
+        "Sin anuncios + modo offline",
+        "Skins, títulos y marcos exclusivos",
+        "Acceso a gremios y eventos",
+      ],
+      cta: "Despertar poder",
+    },
+    monarca: {
+      name: "Monarca",
+      features: [
+        "Todo de Cazador, sin límites",
+        "Sesiones 1:1 con tutor humano",
+        "Ruta personalizada por IA",
+        "Certificado de competencia",
+        "Ranking de élite y eventos VIP",
+        "Soporte prioritario 24h",
+      ],
+      cta: "Ascender al trono",
+    },
+  },
+  cta: {
+    titlePre: "¿Estás listo para",
+    titleHi: "despertar tu poder?",
+    subtitle: "Únete a miles de aventureros y domina el inglés de forma épica.",
+    button: "Comenzar mi jornada",
+  },
+  feat: [
+    { t: "Método gamificado", d: "Aprende jugando con misiones y desafíos." },
+    { t: "Contenido de calidad", d: "Clases creadas por expertos en idiomas." },
+    { t: "Comunidad activa", d: "Gremios, chat y eventos todos los días." },
+    { t: "Seguro y confiable", d: "Tus datos protegidos con total seguridad." },
+  ],
+  footer: {
+    tagline: "Tu jornada épica para dominar el inglés empieza aquí.",
+    columns: [
+      { title: "Contenido", links: ["Cómo funciona", "Misiones", "Recursos", "Planes", "FAQ"] },
+      { title: "Comunidad", links: ["Gremios", "Ranking", "Eventos", "Blog"] },
+      { title: "Soporte", links: ["Centro de ayuda", "Contacto", "Términos de uso", "Privacidad"] },
+    ],
+    rights: "© 2026 Solo English. Todos los derechos reservados.",
+  },
+};
+
+export const translations: Record<Lang, Dict> = { pt, en, es };

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Ícone chevron neon roxo">
+  <defs>
+    <linearGradient id="main" x1="128" y1="256" x2="384" y2="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF2D75"/>
+      <stop offset="0.45" stop-color="#8B5CF6"/>
+      <stop offset="1" stop-color="#6EE7FF"/>
+    </linearGradient>
+
+    <linearGradient id="whiteGlow" x1="150" y1="256" x2="360" y2="256" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#DCEBFF"/>
+    </linearGradient>
+
+    <filter id="outerGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="16" result="blur1"/>
+      <feColorMatrix in="blur1" type="matrix"
+        values="0.5 0 0 0 0.45
+                0 0.1 0 0 0.1
+                0 0 1 0 1
+                0 0 0 1 0" result="purpleGlow"/>
+      <feGaussianBlur stdDeviation="5" in="SourceGraphic" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="purpleGlow"/>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <filter id="cyanGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0 0 0 0 0.2
+                0 0.7 0 0 0.9
+                0 0 1 0 1
+                0 0 0 0.9 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" fill="none"/>
+
+  <!-- glow traseiro -->
+  <path d="M315 116 L175 256 L315 396"
+        fill="none"
+        stroke="url(#main)"
+        stroke-width="74"
+        stroke-linecap="butt"
+        stroke-linejoin="miter"
+        opacity="0.45"
+        filter="url(#outerGlow)"/>
+
+  <!-- camada magenta externa -->
+  <path d="M314 120 L178 256 L314 392"
+        fill="none"
+        stroke="#FF2D75"
+        stroke-width="58"
+        stroke-linecap="butt"
+        stroke-linejoin="miter"
+        filter="url(#outerGlow)"/>
+
+  <!-- camada azul/roxa -->
+  <path d="M332 132 L208 256 L332 380"
+        fill="none"
+        stroke="#6D5BFF"
+        stroke-width="50"
+        stroke-linecap="butt"
+        stroke-linejoin="miter"
+        filter="url(#cyanGlow)"/>
+
+  <!-- corte escuro interno para criar formato angular -->
+  <path d="M338 162 L244 256 L338 350"
+        fill="none"
+        stroke="#071126"
+        stroke-width="42"
+        stroke-linecap="butt"
+        stroke-linejoin="miter"/>
+
+  <!-- chevron branco principal -->
+  <path d="M304 168 L216 256 L304 344"
+        fill="none"
+        stroke="url(#whiteGlow)"
+        stroke-width="38"
+        stroke-linecap="butt"
+        stroke-linejoin="miter"
+        filter="url(#cyanGlow)"/>
+
+  <!-- corte central escuro para deixar símbolo como dupla seta -->
+  <path d="M308 206 L258 256 L308 306"
+        fill="none"
+        stroke="#071126"
+        stroke-width="22"
+        stroke-linecap="butt"
+        stroke-linejoin="miter"/>
+
+</svg>

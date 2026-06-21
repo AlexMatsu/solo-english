@@ -44,7 +44,13 @@ export default function LoginPage() {
     setLoading(false);
 
     if (error) {
-      setSenhaErr("E-mail ou senha incorretos. Confira e tente de novo.");
+      if (/not confirmed|confirm/i.test(error.message)) {
+        setEmailErr(
+          "Confirme seu e-mail pelo link que enviamos antes de entrar."
+        );
+      } else {
+        setSenhaErr("E-mail ou senha incorretos. Confira e tente de novo.");
+      }
       return;
     }
 

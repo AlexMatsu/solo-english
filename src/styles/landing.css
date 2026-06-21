@@ -13,10 +13,13 @@
   position: absolute; inset: auto; top: 50%; left: 50%; transform: translate(-50%, -50%);
   width: 420px; height: 420px; border-radius: 50%;
   background: radial-gradient(circle, var(--glow-soft), transparent 65%); filter: blur(10px); z-index: 1;
+  pointer-events: none;
 }
 
 .hero-split { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; }
-.cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+.cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+.cols-3 .panel { display: flex; flex-direction: column; }
+.cols-3 .panel .btn { margin-top: auto; }
 .cols-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 
 .journey { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
@@ -28,10 +31,15 @@
 
 .ladder { list-style: none; }
 .ladder li {
-  display: flex; align-items: center; gap: 14px; padding: 11px 14px; border-radius: 8px; font-size: 14px;
+  display: flex; align-items: center; gap: 12px; padding: 9px 14px; border-radius: 8px; font-size: 14px;
   font-family: "Oswald", sans-serif; font-style: italic; text-transform: uppercase; letter-spacing: 1px; color: var(--muted);
   background: #0c0c14; margin-bottom: 7px;
 }
+.ladder .lig { width: 26px; height: 26px; filter: drop-shadow(0 0 5px var(--glow-soft)); }
+/* dentro do card de progressão: ladder preenche a altura e as linhas crescem
+   por igual, fazendo o LEGEND alinhar na base com os botões dos outros cards */
+.cols-3 .panel .ladder { flex: 1; display: flex; flex-direction: column; }
+.cols-3 .panel .ladder li { flex: 1; }
 .ladder .lv {
   width: 34px; height: 26px; display: grid; place-items: center; border-radius: 6px; background: #1a1a26;
   color: var(--text); font-style: normal; font-size: 13px;
@@ -42,6 +50,7 @@
 .reward-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
 .reward { background: #0c0c14; border: 1px solid var(--line); border-radius: 10px; padding: 14px 6px; text-align: center; }
 .reward span { font-size: 24px; filter: drop-shadow(0 0 8px var(--glow)); }
+.reward img { width: 40px; height: 40px; margin: 0 auto; filter: drop-shadow(0 0 8px var(--glow)); }
 .reward b { display: block; font-size: 10px; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: .5px; }
 
 .rank-tabs { display: flex; gap: 6px; margin-bottom: 14px; }
@@ -50,30 +59,42 @@
 .rank-list { list-style: none; }
 .rank-list li { display: flex; align-items: center; gap: 12px; padding: 10px 6px; border-bottom: 1px solid var(--line); font-size: 14px; }
 .rank-list .pos { width: 22px; color: var(--accent-3); font-family: "Oswald", sans-serif; font-style: italic; font-weight: 700; }
-.rank-list .pa { font-size: 18px; width: 30px; height: 30px; display: grid; place-items: center; background: #14141e; border-radius: 50%; }
+.rank-list .pa { font-size: 18px; width: 32px; height: 32px; display: grid; place-items: center; }
+.rank-list .pa img { width: 32px; height: 32px; filter: drop-shadow(0 0 6px var(--glow-soft)); }
 .rank-list .pn { flex: 1; }
+.rank-list .pn small { display: block; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
 .rank-list .px { color: var(--muted); font-size: 13px; }
 
 .missions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .mission { display: flex; align-items: center; gap: 14px; background: #0c0c14; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
-.mission .mi { font-size: 22px; }
+.mission .mi { font-size: 22px; display: grid; place-items: center; }
+.mission .mi img { width: 34px; height: 34px; filter: drop-shadow(0 0 8px var(--glow)); }
 .mission .mt { flex: 1; }
 .mission .mt b { font-size: 14px; display: block; }
 .mission .mt small { color: var(--gold); font-size: 12px; }
 .mission .mp { color: var(--muted); font-size: 13px; }
 .mission.done { border-color: var(--line-red); }
 
-.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; align-items: stretch; }
+.testi-grid figure { display: flex; flex-direction: column; }
+.testi-grid figure figcaption { margin-top: auto; }
 .testi-grid .stars { color: var(--gold); letter-spacing: 3px; font-size: 14px; margin-bottom: 12px; }
 .testi-grid blockquote { font-size: 15px; color: var(--text); margin-bottom: 20px; line-height: 1.6; }
 .testi-grid figcaption { display: flex; align-items: center; gap: 12px; border-top: 1px solid var(--line); padding-top: 16px; }
 .testi-grid .ava { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-size: 20px; background: #14141e; box-shadow: 0 0 0 2px var(--line-red); }
+.testi-grid .ava img { width: 42px; height: 42px; background: none; box-shadow: none; filter: drop-shadow(0 0 6px var(--glow-soft)); }
+.testi-grid .ava:has(img) { background: none; box-shadow: none; }
 .testi-grid figcaption small { display: block; color: var(--muted); font-size: 12px; }
 
-.plans { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 820px; margin: 0 auto; }
+.plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1060px; margin: 0 auto; align-items: stretch; }
+.plans .panel { display: flex; flex-direction: column; }
+.plans .panel .btn { margin-top: auto; }
 .plan-list { list-style: none; margin: 20px 0 26px; }
 .plan-list li { padding: 9px 0; font-size: 15px; color: var(--muted); display: flex; gap: 10px; border-bottom: 1px solid var(--line); }
 .plan-list li::before { content: "◆"; color: var(--accent); font-size: 11px; }
+
+/* ===== Carrossel (wrapper) ===== */
+.carousel { position: relative; }
 
 .feat { display: flex; gap: 14px; align-items: flex-start; }
 .feat b { font-size: 15px; }
@@ -83,8 +104,31 @@
   .hero-split { grid-template-columns: 1fr; }
   .cols-3 { grid-template-columns: 1fr; }
   .cols-4 { grid-template-columns: 1fr 1fr; }
-  .journey { flex-direction: column; align-items: center; gap: 24px; }
-  .jsep { transform: rotate(90deg); margin: 0; }
-  .testi-grid, .plans { grid-template-columns: 1fr; }
   .missions { grid-template-columns: 1fr; }
+
+  /* ===== Carrosséis no mobile (scroll horizontal + snap) ===== */
+  .journey,
+  .testi-grid,
+  .plans {
+    display: flex; flex-direction: row; flex-wrap: nowrap; align-items: stretch;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    gap: 14px; margin: 0 -24px;
+    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    max-width: none;
+  }
+  .journey::-webkit-scrollbar,
+  .testi-grid::-webkit-scrollbar,
+  .plans::-webkit-scrollbar { display: none; }
+
+  /* padding lateral = metade do espaço livre, pra QUALQUER card (1º/último
+     inclusive) conseguir centralizar na tela ao dar snap */
+  .journey { padding: 4px 14% 18px; }
+  .testi-grid,
+  .plans { padding: 4px 9% 18px; }
+
+  .journey .jstep { flex: 0 0 72%; max-width: 72%; scroll-snap-align: center; }
+  .testi-grid figure { flex: 0 0 82%; max-width: 82%; scroll-snap-align: center; }
+  .plans > .panel { flex: 0 0 82%; max-width: 82%; scroll-snap-align: center; }
+
+  .jsep { display: none; }
 }
