@@ -3,8 +3,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { getSession, logout, type Session } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
 import "@/styles/dashboard.css";
+
+interface SessionUser {
+  name: string;
+  email: string;
+}
 
 /* ---------- Tipos ---------- */
 type NodeStatus = "done" | "current" | "locked";
@@ -182,7 +187,7 @@ const streakDays: StreakDay[] = [
 
 export default function JornadaPage() {
   const router = useRouter();
-  const [user, setUser] = useState<Session | null>(null);
+  const [user, setUser] = useState<SessionUser | null>(null);
   const [checking, setChecking] = useState<boolean>(true);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [selectedLesson, setSelectedLesson] = useState<SelectedLesson | null>(
@@ -192,17 +197,28 @@ export default function JornadaPage() {
 
   /* Protege a rota: sem sessão → volta para o login */
   useEffect(() => {
-    const session = getSession();
-    if (!session) {
-      router.replace("/login");
-      return;
-    }
-    setUser(session);
-    setChecking(false);
+    let active = true;
+    supabase.auth.getSession().then(({ data }) => {
+      if (!active) return;
+      const session = data.session;
+      if (!session) {
+        router.replace("/login");
+        return;
+      }
+      const meta = session.user.user_metadata as { name?: string };
+      setUser({
+        name: meta.name ?? session.user.email?.split("@")[0] ?? "Aventureiro",
+        email: session.user.email ?? "",
+      });
+      setChecking(false);
+    });
+    return () => {
+      active = false;
+    };
   }, [router]);
 
-  const handleLogout = (): void => {
-    logout();
+  const handleLogout = async (): Promise<void> => {
+    await supabase.auth.signOut();
     router.replace("/login");
   };
 

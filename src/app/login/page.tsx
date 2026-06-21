@@ -3,18 +3,19 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { login } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
 
 export default function LoginPage() {
   const router = useRouter();
   const [showPass, setShowPass] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [emailErr, setEmailErr] = useState<string | null>(null);
   const [senhaErr, setSenhaErr] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSuccess(false);
     let ok = true;
@@ -35,9 +36,15 @@ export default function LoginPage() {
 
     if (!ok) return;
 
-    const res = login(email, senha);
-    if (!res.ok) {
-      setSenhaErr(res.error ?? "Não foi possível entrar.");
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email.trim().toLowerCase(),
+      password: senha,
+    });
+    setLoading(false);
+
+    if (error) {
+      setSenhaErr("E-mail ou senha incorretos. Confira e tente de novo.");
       return;
     }
 
@@ -228,8 +235,9 @@ export default function LoginPage() {
               </Link>
             </div>
 
-            <button type="submit" className="btn block lg">
-              Entrar na jornada <span className="arrow">→</span>
+            <button type="submit" className="btn block lg" disabled={loading}>
+              {loading ? "Entrando…" : "Entrar na jornada"}{" "}
+              <span className="arrow">→</span>
             </button>
 
             {success ? (

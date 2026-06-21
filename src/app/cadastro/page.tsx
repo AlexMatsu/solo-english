@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { register } from "@/lib/auth";
+import { supabase } from "@/lib/supabase";
 
 const COLORS = {
   weak: "var(--accent)",
@@ -77,13 +77,14 @@ export default function CadastroPage() {
   const [senhaErr, setSenhaErr] = useState<string | null>(null);
   const [termosErr, setTermosErr] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const strength = strengthState(senha);
   // senhaErr (submit-level) overrides the live strength hint when present.
   const senhaHintText = senhaErr ?? strength.label;
   const senhaHintError = senhaErr ? true : strength.isError;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSuccess(false);
     let ok = true;
@@ -118,9 +119,27 @@ export default function CadastroPage() {
 
     if (!ok) return;
 
-    const res = register(nome, email, senha);
-    if (!res.ok) {
-      setEmailErr(res.error ?? "Não foi possível criar a conta.");
+    setLoading(true);
+    const { data, error } = await supabase.auth.signUp({
+      email: email.trim().toLowerCase(),
+      password: senha,
+      options: { data: { name: nome.trim() } },
+    });
+    setLoading(false);
+
+    if (error) {
+      const msg = /registered|already/i.test(error.message)
+        ? "Este e-mail já tem uma conta. Tente entrar."
+        : error.message;
+      setEmailErr(msg);
+      return;
+    }
+
+    // Se a confirmação de e-mail estiver ligada no Supabase, não há sessão ainda.
+    if (!data.session) {
+      setEmailErr(
+        "Conta criada! Confirme pelo link enviado ao seu e-mail e depois entre."
+      );
       return;
     }
 
@@ -387,8 +406,9 @@ export default function CadastroPage() {
             </label>
             {termosErr ? <p className="hint error">{termosErr}</p> : null}
 
-            <button type="submit" className="btn block lg">
-              Criar conta e despertar poder <span className="arrow">→</span>
+            <button type="submit" className="btn block lg" disabled={loading}>
+              {loading ? "Despertando…" : "Criar conta e despertar poder"}{" "}
+              <span className="arrow">→</span>
             </button>
 
             {success ? (
