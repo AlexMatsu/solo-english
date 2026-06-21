@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { register } from "@/lib/auth";
 
 const COLORS = {
   weak: "var(--accent)",
@@ -63,6 +65,7 @@ function strengthState(v: string): {
 }
 
 export default function CadastroPage() {
+  const router = useRouter();
   const [showPass, setShowPass] = useState(false);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -115,7 +118,14 @@ export default function CadastroPage() {
 
     if (!ok) return;
 
+    const res = register(nome, email, senha);
+    if (!res.ok) {
+      setEmailErr(res.error ?? "Não foi possível criar a conta.");
+      return;
+    }
+
     setSuccess(true);
+    router.push("/jornada");
   };
 
   return (

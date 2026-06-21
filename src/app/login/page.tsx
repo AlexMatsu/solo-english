@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { login } from "@/lib/auth";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [showPass, setShowPass] = useState(false);
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -32,7 +35,14 @@ export default function LoginPage() {
 
     if (!ok) return;
 
+    const res = login(email, senha);
+    if (!res.ok) {
+      setSenhaErr(res.error ?? "Não foi possível entrar.");
+      return;
+    }
+
     setSuccess(true);
+    router.push("/jornada");
   };
 
   return (

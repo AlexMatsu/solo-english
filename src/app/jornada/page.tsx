@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { getSession, logout, type Session } from "@/lib/auth";
 import "@/styles/dashboard.css";
 
 /* ---------- Tipos ---------- */
@@ -179,11 +181,32 @@ const streakDays: StreakDay[] = [
 ];
 
 export default function JornadaPage() {
+  const router = useRouter();
+  const [user, setUser] = useState<Session | null>(null);
+  const [checking, setChecking] = useState<boolean>(true);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [selectedLesson, setSelectedLesson] = useState<SelectedLesson | null>(
     null
   );
   const [claimed, setClaimed] = useState<boolean>(false);
+
+  /* Protege a rota: sem sessão → volta para o login */
+  useEffect(() => {
+    const session = getSession();
+    if (!session) {
+      router.replace("/login");
+      return;
+    }
+    setUser(session);
+    setChecking(false);
+  }, [router]);
+
+  const handleLogout = (): void => {
+    logout();
+    router.replace("/login");
+  };
+
+  const firstName = user?.name.split(" ")[0] ?? "";
 
   const openLesson = (node: TrailNode): void => {
     if (node.status === "locked") return;
@@ -203,6 +226,23 @@ export default function JornadaPage() {
   }, [selectedLesson]);
 
   const modalXp = selectedLesson?.xp ? `+${selectedLesson.xp} XP` : "+0 XP";
+
+  if (checking || !user) {
+    return (
+      <main
+        style={{
+          minHeight: "100vh",
+          display: "grid",
+          placeItems: "center",
+          color: "var(--muted)",
+        }}
+      >
+        <p className="display" style={{ fontSize: 22 }}>
+          Abrindo seu portal…
+        </p>
+      </main>
+    );
+  }
 
   return (
     <>
@@ -231,12 +271,21 @@ export default function JornadaPage() {
             <span className="pill lives" title="Vidas restantes">
               ❤️ <b>5</b>
             </span>
-            <button className="player-chip" title="ShadowHunter · Nível 24">
+            <button className="player-chip" title={`${user.name} · Nível 24`}>
               <span className="pc-ava">🥷</span>
               <span className="pc-meta">
-                <small>ShadowHunter</small>
+                <small>{user.name}</small>
                 <b className="display">NÍVEL 24</b>
               </span>
+            </button>
+            <button
+              className="pill"
+              type="button"
+              onClick={handleLogout}
+              title="Sair da conta"
+              aria-label="Sair da conta"
+            >
+              🚪 <b>Sair</b>
             </button>
           </div>
         </div>
@@ -297,7 +346,7 @@ export default function JornadaPage() {
                   margin: "6px 0 18px",
                 }}
               >
-                Bom te ver, <span className="r">ShadowHunter.</span>
+                Bom te ver, <span className="r">{firstName}.</span>
               </h1>
               <div className="lvl-row">
                 <span className="lvl-badge display">24</span>
