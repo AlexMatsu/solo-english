@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+import { PrimaryButton } from "@/components/Button";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -165,7 +166,10 @@ export default function LoginPage() {
               <label htmlFor="email">E-mail</label>
               <div className="input-wrap">
                 <span className="lead" aria-hidden="true">
-                  ✉
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                    <path d="m3 7 9 6 9-6" />
+                  </svg>
                 </span>
                 <input
                   className={`input${emailErr ? " err" : ""}`}
@@ -188,7 +192,10 @@ export default function LoginPage() {
               <label htmlFor="senha">Senha</label>
               <div className="input-wrap">
                 <span className="lead" aria-hidden="true">
-                  🔒
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="4.5" y="10.5" width="15" height="10" rx="2" />
+                    <path d="M8 10.5V7a4 4 0 0 1 8 0v3.5" />
+                  </svg>
                 </span>
                 <input
                   className={`input${senhaErr ? " err" : ""}`}
@@ -241,10 +248,10 @@ export default function LoginPage() {
               </Link>
             </div>
 
-            <button type="submit" className="btn block lg" disabled={loading}>
+            <PrimaryButton type="submit" block disabled={loading}>
               {loading ? "Entrando…" : "Entrar na jornada"}{" "}
               <span className="arrow">→</span>
-            </button>
+            </PrimaryButton>
 
             {success ? (
               <p
@@ -256,17 +263,6 @@ export default function LoginPage() {
               </p>
             ) : null}
           </form>
-
-          <div className="divider">ou continue com</div>
-
-          <div className="social-btns">
-            <button type="button" className="social-btn">
-              🔴 Google
-            </button>
-            <button type="button" className="social-btn">
-              🎮 Discord
-            </button>
-          </div>
 
           <p className="auth-foot">
             Ainda não é um aventureiro? <Link href="/cadastro">Criar conta</Link>
