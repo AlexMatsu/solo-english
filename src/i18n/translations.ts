@@ -118,6 +118,19 @@ const pt = {
     { t: "Comunidade ativa", d: "Guildas, chat e eventos todos os dias." },
     { t: "Seguro e confiável", d: "Seus dados protegidos com segurança total." },
   ],
+  faq: {
+    eyebrow: "Dúvidas",
+    titlePre: "Perguntas",
+    titleHi: "frequentes",
+    items: [
+      { q: "Preciso pagar para começar?", a: "Não! O plano Aprendiz é gratuito para sempre, com missões diárias e acesso ao ranking. Você só evolui para um plano pago se quiser recursos extras como o tutor de IA." },
+      { q: "Como funciona o sistema de XP e níveis?", a: "Cada missão concluída rende XP e Gold. Acumulando XP você sobe de nível e desbloqueia novos conteúdos, skins e recompensas — igual a um RPG." },
+      { q: "Existe aplicativo para celular?", a: "Sim. A plataforma é 100% responsiva e funciona no navegador do celular, e os planos pagos liberam o modo offline." },
+      { q: "O tutor de IA ajuda no speaking?", a: "Sim! Você pratica conversação por voz a qualquer hora e recebe correção de pronúncia em tempo real, no seu ritmo." },
+      { q: "Posso cancelar quando quiser?", a: "Claro. Não há fidelidade — você cancela ou troca de plano a qualquer momento, direto no seu perfil." },
+      { q: "Sou iniciante total. Consigo acompanhar?", a: "Com certeza. A trilha começa do zero (Beginner) e evolui de forma gradual, adaptada ao seu nível." },
+    ],
+  },
   footer: {
     tagline: "Sua jornada épica para dominar o inglês começa aqui.",
     columns: [
@@ -249,6 +262,19 @@ const en: Dict = {
     { t: "Active community", d: "Guilds, chat and events every day." },
     { t: "Safe and reliable", d: "Your data protected with total security." },
   ],
+  faq: {
+    eyebrow: "Got questions?",
+    titlePre: "Frequently asked",
+    titleHi: "questions",
+    items: [
+      { q: "Do I need to pay to start?", a: "No! The Apprentice plan is free forever, with daily missions and ranking access. You only upgrade if you want extras like the AI tutor." },
+      { q: "How do XP and levels work?", a: "Every completed mission earns XP and Gold. Accumulating XP levels you up and unlocks new content, skins and rewards — just like an RPG." },
+      { q: "Is there a mobile app?", a: "Yes. The platform is fully responsive and runs in your phone's browser, and paid plans unlock offline mode." },
+      { q: "Does the AI tutor help with speaking?", a: "Yes! You practice voice conversation anytime and get real-time pronunciation feedback, at your own pace." },
+      { q: "Can I cancel anytime?", a: "Of course. No lock-in — cancel or switch plans anytime, right from your profile." },
+      { q: "I'm a total beginner. Can I keep up?", a: "Absolutely. The path starts from zero (Beginner) and grows gradually, adapted to your level." },
+    ],
+  },
   footer: {
     tagline: "Your epic journey to master English starts here.",
     columns: [
@@ -378,6 +404,19 @@ const es: Dict = {
     { t: "Comunidad activa", d: "Gremios, chat y eventos todos los días." },
     { t: "Seguro y confiable", d: "Tus datos protegidos con total seguridad." },
   ],
+  faq: {
+    eyebrow: "Dudas",
+    titlePre: "Preguntas",
+    titleHi: "frecuentes",
+    items: [
+      { q: "¿Necesito pagar para empezar?", a: "¡No! El plan Aprendiz es gratis para siempre, con misiones diarias y acceso al ranking. Solo subes de plan si quieres extras como el tutor de IA." },
+      { q: "¿Cómo funciona el sistema de XP y niveles?", a: "Cada misión completada da XP y Gold. Acumulando XP subes de nivel y desbloqueas contenidos, skins y recompensas — como en un RPG." },
+      { q: "¿Hay aplicación para móvil?", a: "Sí. La plataforma es 100% responsiva y funciona en el navegador del móvil, y los planes de pago liberan el modo offline." },
+      { q: "¿El tutor de IA ayuda con el speaking?", a: "¡Sí! Practicas conversación por voz a cualquier hora y recibes corrección de pronunciación en tiempo real, a tu ritmo." },
+      { q: "¿Puedo cancelar cuando quiera?", a: "Claro. Sin permanencia — cancela o cambia de plan cuando quieras, desde tu perfil." },
+      { q: "Soy principiante total. ¿Podré seguir el ritmo?", a: "Por supuesto. La ruta empieza desde cero (Beginner) y avanza de forma gradual, adaptada a tu nivel." },
+    ],
+  },
   footer: {
     tagline: "Tu jornada épica para dominar el inglés empieza aquí.",
     columns: [

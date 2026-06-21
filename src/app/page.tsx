@@ -53,6 +53,17 @@ export default function Home() {
 
       {/* HERO */}
       <section id="inicio" className="section hero-bg" style={{ paddingTop: 72, overflow: "hidden" }}>
+        <video
+          className="hero-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/hero-bg.png"
+          aria-hidden="true"
+        >
+          <source src="/hero.mp4" type="video/mp4" />
+        </video>
         <div className="wrap hero-split">
           <div>
             <p className="eyebrow" style={{ marginBottom: 18 }}>{t.hero.eyebrow}</p>
@@ -291,6 +302,27 @@ export default function Home() {
               <div><b>{f.t}</b><p>{f.d}</p></div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="section alt">
+        <div className="wrap faq-wrap">
+          <div className="section-head" style={{ textAlign: "center" }}>
+            <p className="eyebrow">{t.faq.eyebrow}</p>
+            <h2>{t.faq.titlePre} <span className="r">{t.faq.titleHi}</span></h2>
+          </div>
+          <div className="faq-list">
+            {t.faq.items.map((item, i) => (
+              <details className="faq-item" key={i}>
+                <summary>
+                  <span>{item.q}</span>
+                  <span className="faq-ic" aria-hidden="true">+</span>
+                </summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
 

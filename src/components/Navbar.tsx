@@ -31,9 +31,14 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <nav className="nav-links" style={open ? { display: "flex" } : undefined}>
+        <nav className={`nav-links${open ? " open" : ""}`}>
           {LINKS.map((l) => (
-            <a key={l.href} href={l.href} className={l.active ? "active" : undefined}>
+            <a
+              key={l.href}
+              href={l.href}
+              className={l.active ? "active" : undefined}
+              onClick={() => setOpen(false)}
+            >
               {l.label}
             </a>
           ))}
@@ -51,11 +56,11 @@ export default function Navbar() {
 
         <button
           className="nav-burger"
-          aria-label="Abrir menu"
+          aria-label={open ? "Fechar menu" : "Abrir menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
-          ☰
+          {open ? "✕" : "☰"}
         </button>
       </div>
     </header>

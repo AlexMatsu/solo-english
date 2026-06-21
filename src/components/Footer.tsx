@@ -8,7 +8,7 @@ export default function Footer() {
   const COLUMNS = t.footer.columns;
 
   return (
-    <footer id="faq" className="footer">
+    <footer className="footer">
       <div className="wrap footer-grid">
         <div>
           <Link href="/" className="logo">
