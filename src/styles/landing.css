@@ -113,9 +113,9 @@
     display: flex; flex-direction: row; flex-wrap: nowrap; align-items: stretch;
     overflow-x: auto; scroll-snap-type: x mandatory;
     gap: 14px; margin: 0 -24px;
-    scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     max-width: none;
-    overscroll-behavior-x: contain; touch-action: pan-x pan-y;
+    overscroll-behavior-x: contain; touch-action: pan-x;
   }
   .journey::-webkit-scrollbar,
   .testi-grid::-webkit-scrollbar,
