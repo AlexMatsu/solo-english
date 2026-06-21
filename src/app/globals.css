@@ -37,14 +37,15 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--ground);
   color: var(--text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100%;
 }
 a { text-decoration: none; color: inherit; }
 img { max-width: 100%; display: block; }
@@ -316,7 +317,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* — Seções genéricas — */
-.section { padding: 96px 0; position: relative; }
+.section { padding: 96px 0; position: relative; overflow-x: clip; }
 .section.alt { background: var(--ground-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 .section-head { margin-bottom: 48px; }
 .section-head h2 { font-family: "Oswald", sans-serif; font-style: italic; font-weight: 700; text-transform: uppercase;
@@ -508,11 +509,12 @@ img { max-width: 100%; display: block; }
   /* logo compacta: só "SE" */
   .logo-full { display: none; }
   .logo-mini { display: block; }
-  /* esconde o seletor de idioma no mobile pra dar espaço */
-  .nav-cta .lang { display: none; }
+  /* seletor de idioma compacto ao lado de Entrar */
+  .nav-cta .lang-toggle { padding: 7px 9px; font-size: 12px; gap: 5px; }
+  .nav-cta .lang-flag { font-size: 15px; }
   /* botões menores pra caberem */
-  .nav-cta .btn { font-size: 12px; padding: 9px 13px; letter-spacing: .5px; }
-  .nav-cta .btn.lg { font-size: 12px; padding: 9px 13px; }
+  .nav-cta .btn { font-size: 12px; padding: 9px 12px; letter-spacing: .5px; }
+  .nav-cta .btn.lg { font-size: 12px; padding: 9px 12px; }
   .section { padding: 64px 0; }
   .footer-grid { grid-template-columns: 1fr; }
 }
