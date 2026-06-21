@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recuperar acesso — Solo English</title>
+  <meta name="description" content="Perdeu o acesso? Enviamos um link de recuperação para você voltar à sua jornada." />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="bg-atmos"></div>
+  <div class="bg-grid"></div>
+
+  <main class="auth">
+    <!-- Painel imersivo -->
+    <aside class="auth-aside">
+      <div class="aura"></div>
+
+      <a href="index.html" class="logo">SOLO<br><span class="r">ENGLISH</span></a>
+
+      <div style="position:relative; z-index:2;">
+        <p class="eyebrow" style="margin-bottom:16px;">Nem todo herói lembra a senha</p>
+        <h2 class="display" style="font-size:clamp(32px,4.2vw,50px); color:#fff;">
+          Todo herói<br>tropeça.<br>
+          <span class="r" style="text-shadow:0 0 28px var(--glow);">O importante é levantar.</span>
+        </h2>
+        <p style="color:var(--muted); font-size:16px; max-width:340px; margin-top:18px;">
+          Sua ofensiva, seu nível e suas conquistas continuam intactos. Vamos te trazer de volta em segundos.
+        </p>
+      </div>
+
+      <div class="panel glow corner" style="padding:18px 20px; position:relative; z-index:2; max-width:320px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="font-size:26px;">🛡️</span>
+          <p style="font-size:13px; color:var(--muted);">Dica: confira a pasta de <b style="color:var(--text);">spam</b> caso o link demore a chegar.</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Formulário -->
+    <section class="auth-main">
+      <div class="auth-card">
+
+        <!-- Estado 1: pedir e-mail -->
+        <div id="stateRequest">
+          <h1>Recuperar seu <span class="r">acesso</span></h1>
+          <p class="sub">Informe o e-mail da sua conta. Enviaremos um link para você redefinir a senha e voltar à jornada.</p>
+
+          <form id="recoverForm" novalidate>
+            <div class="field">
+              <label for="email">E-mail</label>
+              <div class="input-wrap">
+                <span class="lead" aria-hidden="true">✉</span>
+                <input class="input" type="email" id="email" name="email" autocomplete="email"
+                       placeholder="voce@exemplo.com" required />
+              </div>
+              <p class="hint" id="emailHint" hidden></p>
+            </div>
+
+            <button type="submit" class="btn block lg">Enviar link de recuperação <span class="arrow">→</span></button>
+          </form>
+
+          <p class="auth-foot"><a href="login.html">← Voltar para o login</a></p>
+        </div>
+
+        <!-- Estado 2: sucesso -->
+        <div id="stateSuccess" hidden style="text-align:center;">
+          <div style="font-size:56px; filter:drop-shadow(0 0 18px var(--glow)); margin-bottom:8px;">📩</div>
+          <h1>Link <span class="r">enviado!</span></h1>
+          <p class="sub" style="margin-bottom:24px;">
+            Enviamos um link de recuperação para <b id="sentEmail" style="color:var(--text);"></b>.
+            Verifique sua caixa de entrada e a pasta de spam.
+          </p>
+
+          <button type="button" id="resendBtn" class="btn block lg">Reenviar link</button>
+          <p class="hint" id="resendMsg" role="status" style="text-align:center; margin-top:12px;" hidden></p>
+
+          <p class="auth-foot"><a href="login.html">← Voltar para o login</a></p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script>
+    var form = document.getElementById('recoverForm');
+    var email = document.getElementById('email');
+    var emailHint = document.getElementById('emailHint');
+    var stateRequest = document.getElementById('stateRequest');
+    var stateSuccess = document.getElementById('stateSuccess');
+    var sentEmail = document.getElementById('sentEmail');
+    var resendBtn = document.getElementById('resendBtn');
+    var resendMsg = document.getElementById('resendMsg');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var val = email.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+        email.classList.add('err');
+        emailHint.textContent = 'Digite um e-mail válido para enviarmos o link.';
+        emailHint.className = 'hint error'; emailHint.hidden = false;
+        return;
+      }
+      email.classList.remove('err'); emailHint.hidden = true;
+
+      sentEmail.textContent = val;
+      stateRequest.hidden = true;
+      stateSuccess.hidden = false;
+      stateSuccess.querySelector('h1').focus?.();
+    });
+
+    resendBtn.addEventListener('click', function () {
+      resendMsg.textContent = 'Reenviamos o link para ' + sentEmail.textContent + '.';
+      resendMsg.className = 'hint'; resendMsg.style.color = '#2ecc71'; resendMsg.hidden = false;
+    });
+  </script>
+</body>
+</html>

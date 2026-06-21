@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrar — Solo English</title>
+  <meta name="description" content="Entre na sua jornada e continue evoluindo seu inglês de forma épica." />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div class="bg-atmos"></div>
+  <div class="bg-grid"></div>
+
+  <main class="auth">
+    <!-- Painel imersivo -->
+    <aside class="auth-aside">
+      <div class="aura"></div>
+
+      <a href="index.html" class="logo">SOLO<br><span class="r">ENGLISH</span></a>
+
+      <div style="position:relative; z-index:2;">
+        <p class="eyebrow" style="margin-bottom:16px;">Sua jornada continua</p>
+        <h2 class="display" style="font-size:clamp(34px,4.4vw,52px); color:#fff;">
+          Bem-vindo de<br>volta,<br>
+          <span class="r" style="text-shadow:0 0 28px var(--glow);">Caçador.</span>
+        </h2>
+        <p style="color:var(--muted); font-size:16px; max-width:340px; margin-top:18px;">
+          O mundo não espera. Suas missões estão prontas e o ranking não para de subir.
+        </p>
+      </div>
+
+      <!-- HUD preview: nível / streak -->
+      <div class="panel glow corner" style="padding:22px; position:relative; z-index:2; max-width:320px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+          <div>
+            <div style="font-size:11px; color:var(--muted); letter-spacing:1px;">NÍVEL</div>
+            <div class="display" style="font-size:44px; color:#fff; line-height:.8;">24</div>
+          </div>
+          <span class="chip">🔥 Streak 7 dias</span>
+        </div>
+        <div style="margin:18px 0 4px;">
+          <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-bottom:8px;">
+            <span>XP</span><span class="mono">2.450 / 3.000</span>
+          </div>
+          <div class="xpbar"><i style="width:81%"></i></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Formulário -->
+    <section class="auth-main">
+      <div class="auth-card">
+        <h1>Entrar na sua <span class="r">jornada</span></h1>
+        <p class="sub">Retome de onde parou e mantenha sua ofensiva viva.</p>
+
+        <form id="loginForm" novalidate>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <div class="input-wrap">
+              <span class="lead" aria-hidden="true">✉</span>
+              <input class="input" type="email" id="email" name="email" autocomplete="email"
+                     placeholder="voce@exemplo.com" required />
+            </div>
+            <p class="hint" id="emailHint" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="senha">Senha</label>
+            <div class="input-wrap">
+              <span class="lead" aria-hidden="true">🔒</span>
+              <input class="input" type="password" id="senha" name="senha" autocomplete="current-password"
+                     placeholder="Sua senha secreta" required />
+              <button type="button" class="toggle-pass" data-target="senha" aria-label="Mostrar senha">mostrar</button>
+            </div>
+            <p class="hint" id="senhaHint" hidden></p>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; margin:4px 0 22px; gap:12px; flex-wrap:wrap;">
+            <label class="checkrow">
+              <input type="checkbox" id="manter" name="manter" />
+              Manter conectado
+            </label>
+            <a href="recuperar.html" style="color:var(--accent-3); font-weight:600; font-size:14px;">Esqueci minha senha</a>
+          </div>
+
+          <button type="submit" class="btn block lg">Entrar na jornada <span class="arrow">→</span></button>
+
+          <p class="hint" id="formMsg" role="status" style="text-align:center; margin-top:14px;" hidden></p>
+        </form>
+
+        <div class="divider">ou continue com</div>
+
+        <div class="social-btns">
+          <button type="button" class="social-btn">🔴 Google</button>
+          <button type="button" class="social-btn">🎮 Discord</button>
+        </div>
+
+        <p class="auth-foot">Ainda não é um aventureiro? <a href="cadastro.html">Criar conta</a></p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // mostrar/ocultar senha
+    document.querySelectorAll('.toggle-pass').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var input = document.getElementById(btn.dataset.target);
+        var show = input.type === 'password';
+        input.type = show ? 'text' : 'password';
+        btn.textContent = show ? 'ocultar' : 'mostrar';
+        btn.setAttribute('aria-label', show ? 'Ocultar senha' : 'Mostrar senha');
+      });
+    });
+
+    var form = document.getElementById('loginForm');
+    var email = document.getElementById('email');
+    var senha = document.getElementById('senha');
+    var emailHint = document.getElementById('emailHint');
+    var senhaHint = document.getElementById('senhaHint');
+    var formMsg = document.getElementById('formMsg');
+
+    function setError(input, hint, msg) {
+      input.classList.add('err'); input.classList.remove('ok');
+      hint.textContent = msg; hint.className = 'hint error'; hint.hidden = false;
+    }
+    function clearError(input, hint) {
+      input.classList.remove('err');
+      hint.hidden = true; hint.textContent = '';
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var ok = true;
+      formMsg.hidden = true;
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+        setError(email, emailHint, 'Digite um e-mail válido para entrar.'); ok = false;
+      } else { clearError(email, emailHint); }
+
+      if (senha.value.length < 6) {
+        setError(senha, senhaHint, 'Sua senha tem ao menos 6 caracteres.'); ok = false;
+      } else { clearError(senha, senhaHint); }
+
+      if (!ok) return;
+
+      formMsg.textContent = 'Acesso concedido. Abrindo seu portal...';
+      formMsg.className = 'hint'; formMsg.style.color = '#2ecc71'; formMsg.hidden = false;
+    });
+  </script>
+</body>
+</html>
