@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
 import DashboardShell from "@/components/DashboardShell";
+import { IconLock, IconMail } from "@/components/icons";
 import {
   getProfile,
   getCompletedLessons,
@@ -112,6 +113,15 @@ const rankRows = [
   { pos: 5, badge: "bronze", name: "Você", you: true, xp: "0" },
 ];
 
+/* Regiões do mapa da jornada (posições no palco via classes .r1..r5) */
+const REGIONS = [
+  { id: "vila", num: "01", name: "Vila Inicial", scene: "vila" },
+  { id: "floresta", num: "02", name: "Floresta das Palavras", scene: "floresta" },
+  { id: "montanha", num: "03", name: "Montanha da Gramática", scene: "montanha" },
+  { id: "castelo", num: "04", name: "Castelo da Conversação", scene: "castelo" },
+  { id: "trono", num: "05", name: "Trono do Monarca", scene: "trono" },
+];
+
 const WELCOME_NEWS = [
   { icon: "trilha_aprendizado/reading", text: "Novas lições e trilhas de vocabulário, gramática e listening" },
   { icon: "missoes/boss_battle", text: "Bosses semanais com recompensas épicas" },
@@ -168,6 +178,10 @@ export default function JornadaPage() {
   const xp = profile?.xp ?? 0;
   const xpInLevel = xpIntoLevel(xp);
   const trailNodes = buildTrail(completed, level);
+  const currentNode = trailNodes.find((n) => n.status === "current") ?? trailNodes[0];
+  const regionTotal = 10;
+  const regionDone = Math.min(completed.length, regionTotal);
+  const openCurrent = () => currentNode && openLesson(currentNode);
 
   const openLesson = (node: TrailNode) => {
     if (node.status === "locked") return;
@@ -229,6 +243,67 @@ export default function JornadaPage() {
       <DashboardShell>
         {/* ---------- MAIN ---------- */}
         <main className="app-main">
+          {/* hero mobile: seletor de capítulo + coluna esquerda */}
+          <div className="dash-hero">
+            <div className="chapter">
+              <span className="chapter-eyebrow">Capítulo 1</span>
+              <h2 className="chapter-title display">{REGIONS[0].name}</h2>
+              <span className="chapter-sub">Lições <b>{regionDone}/{regionTotal}</b></span>
+            </div>
+
+            <div className="hero-side">
+              {/* Season Pass (pulsando) */}
+              <button type="button" className="hero-sidebtn season-pass">
+                <span className="hsb-ic"><img src="/icons/ranking_liga/lendario.svg" alt="" aria-hidden="true" /></span>
+                <small>Season Pass</small>
+              </button>
+
+              <button type="button" className="hero-sidebtn">
+                <span className="hsb-ic"><img src="/icons/conquistas/sete_dias.svg" alt="" aria-hidden="true" /></span>
+                <small>Check-in</small>
+              </button>
+              <button type="button" className="hero-sidebtn">
+                <span className="hsb-ic"><img src="/icons/missoes/evento.svg" alt="" aria-hidden="true" /></span>
+                <small>Evento</small>
+              </button>
+              <Link href="/jornada/ranking" className="hero-sidebtn">
+                <span className="hsb-ic"><img src="/icons/menu/ranking.svg" alt="" aria-hidden="true" /></span>
+                <small>Ranking</small>
+              </Link>
+            </div>
+
+            <div className="hero-side right">
+              <button type="button" className="hero-sidebtn">
+                <span className="hsb-ic"><img src="/icons/recompensas_epicas/bau_epico.svg" alt="" aria-hidden="true" /></span>
+                <small>Mochila</small>
+              </button>
+              <button type="button" className="hero-sidebtn">
+                <span className="hsb-ic"><IconMail width={28} height={28} /></span>
+                <small>Correios</small>
+              </button>
+              <button type="button" className="hero-sidebtn">
+                <span className="hsb-ic"><img src="/icons/conquistas/guilda.svg" alt="" aria-hidden="true" /></span>
+                <small>Convidar</small>
+              </button>
+            </div>
+
+            {/* personagem correndo no chão */}
+            <img className="hero-runner" src="/runner.webp" alt="" aria-hidden="true" />
+
+            {/* base do hero: Boss (esq) e Dungeon (dir) */}
+            <div className="hero-bottom">
+              <button type="button" className="hero-mode boss">
+                <span className="hm-ic"><img src="/icons/missoes/boss_battle.svg" alt="" aria-hidden="true" /></span>
+                <span className="hm-txt"><b>Boss</b><small>Desafio da semana</small></span>
+              </button>
+              <button type="button" className="hero-mode dungeon">
+                <span className="hm-ic"><img src="/icons/missoes/desafios.svg" alt="" aria-hidden="true" /></span>
+                <span className="hm-txt"><b>Dungeon</b><small>Treino intenso</small></span>
+              </button>
+            </div>
+          </div>
+
+          <div className="dash-content">
           {/* Saudação + barra de nível */}
           <section className="hero-greet panel glow corner">
             <div className="hg-left">
@@ -255,31 +330,64 @@ export default function JornadaPage() {
             </div>
           </section>
 
-          {/* ===== TRILHA DE HOJE ===== */}
-          <section className="trail-wrap">
+          {/* ===== MAPA DA JORNADA ===== */}
+          <section className="map-wrap panel glow corner">
             <div className="sec-title">
-              <h2 className="display">Trilha de <span className="r">hoje</span></h2>
-              <span className="chip">🔥 Comece sua ofensiva</span>
+              <h2 className="display">Mapa da <span className="r">jornada</span></h2>
+              <button type="button" className="btn ghost map-details-btn" onClick={openCurrent}>
+                Ver detalhes da região
+              </button>
             </div>
-            <p className="sec-sub">Avance nó a nó. Conclua o atual para desbloquear o próximo desafio.</p>
+            <p className="sec-sub">
+              Conclua as regiões para desbloquear novos desafios e evoluir como caçador.
+            </p>
 
-            <div className="trail" role="list">
-              {trailNodes.map((node) => {
-                const classes = ["node", node.boss ? "boss" : "", node.status].filter(Boolean).join(" ");
+            <div className="map-stage">
+              <svg className="map-path" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M160 180 C 300 140, 380 200, 470 198 C 580 196, 700 140, 800 205 C 905 275, 770 510, 600 468 C 490 442, 410 475, 300 492" />
+              </svg>
+
+              {REGIONS.map((r, i) => {
+                const status = i === 0 ? "current" : "locked";
+                const locked = status === "locked";
                 return (
                   <button
-                    key={node.id}
-                    className={classes}
-                    role="listitem"
-                    aria-label={node.ariaLabel}
-                    disabled={node.status === "locked"}
-                    onClick={() => openLesson(node)}
+                    key={r.id}
+                    type="button"
+                    className={`region r${i + 1} ${status}`}
+                    disabled={locked}
+                    aria-label={locked ? `${r.name} (bloqueado)` : `${r.name} — região atual`}
+                    onClick={openCurrent}
                   >
-                    <span className="hex"><span className="ic">{node.icon}</span></span>
-                    {node.flag && (
-                      <span className={node.boss ? "node-flag boss-flag" : "node-flag"}>{node.flag}</span>
+                    {!locked && (
+                      <span className="region-pin" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" width="26" height="26">
+                          <path
+                            d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Z"
+                            fill="var(--accent)" stroke="#fff" strokeWidth="1.2"
+                          />
+                          <circle cx="12" cy="9" r="2.6" fill="#fff" />
+                        </svg>
+                      </span>
                     )}
-                    <span className="node-label">{node.label}</span>
+                    <span className="region-art">
+                      <img src={`/icons/mapa/${r.scene}.svg`} alt="" aria-hidden="true" />
+                      {locked && (
+                        <span className="region-lock" aria-hidden="true">
+                          <IconLock width={22} height={22} />
+                        </span>
+                      )}
+                    </span>
+                    <span className="region-num display">{r.num}</span>
+                    <span className="region-name display">{r.name}</span>
+                    {locked ? (
+                      <span className="region-tag">Bloqueado</span>
+                    ) : (
+                      <span className="region-prog">
+                        <span className="mono">{regionDone} / {regionTotal}</span>
+                        <span className="xpbar"><i style={{ width: `${(regionDone / regionTotal) * 100}%` }} /></span>
+                      </span>
+                    )}
                   </button>
                 );
               })}
@@ -338,6 +446,7 @@ export default function JornadaPage() {
             </div>
             <div className="boss-emoji">🐲</div>
           </section>
+          </div>
         </main>
 
         {/* ---------- ASIDE ---------- */}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 170" fill="none">
+  <defs>
+    <linearGradient id="mTop" x1="40" y1="70" x2="160" y2="130" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#34304f"/><stop offset="1" stop-color="#221f38"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="100" cy="150" rx="64" ry="14" fill="#0a0818"/>
+  <path d="M100 132 L168 100 L100 70 L32 100 Z" fill="url(#mTop)"/>
+  <path d="M32 100 L100 132 L100 150 L32 116 Z" fill="#171426"/>
+  <path d="M168 100 L100 132 L100 150 L168 116 Z" fill="#100e1f"/>
+  <!-- picos -->
+  <path d="M70 110 L98 64 L122 110 Z" fill="#2c2947"/>
+  <path d="M98 64 L122 110 L110 110 L98 78 Z" fill="#211e38"/>
+  <path d="M98 64 L92 78 L86 73 Z" fill="#cfc6f5"/>
+  <path d="M108 96 L128 70 L146 104 Z" fill="#262340"/>
+  <path d="M128 70 L120 82 L114 78 Z" fill="#bdb4ea"/>
+</svg>

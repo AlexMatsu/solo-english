@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 170" fill="none">
+  <defs>
+    <linearGradient id="tTop" x1="40" y1="70" x2="160" y2="130" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3a2c5e"/><stop offset="1" stop-color="#241a42"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="100" cy="150" rx="64" ry="14" fill="#0a0818"/>
+  <path d="M100 132 L168 100 L100 70 L32 100 Z" fill="url(#tTop)"/>
+  <path d="M32 100 L100 132 L100 150 L32 116 Z" fill="#171029"/>
+  <path d="M168 100 L100 132 L100 150 L168 116 Z" fill="#100b22"/>
+  <!-- torre central / trono -->
+  <path d="M90 108 L90 70 L100 56 L110 70 L110 108 Z" fill="#2d2456"/>
+  <path d="M100 56 L110 70 L110 108 L100 108 Z" fill="#221a44"/>
+  <path d="M100 40 L104 54 L96 54 Z" fill="#FFB627"/>
+  <rect x="96" y="78" width="8" height="10" fill="#c0a3ff"/>
+  <path d="M78 108 l8 -22 0 22 Z" fill="#271f4a"/>
+  <path d="M122 108 l-8 -20 0 20 Z" fill="#1f1840"/>
+</svg>

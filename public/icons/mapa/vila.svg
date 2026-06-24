@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 170" fill="none">
+  <defs>
+    <linearGradient id="vTop" x1="40" y1="70" x2="160" y2="130" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3a2f6b"/><stop offset="1" stop-color="#241c46"/>
+    </linearGradient>
+    <radialGradient id="vGlow" cx="0.5" cy="0.42" r="0.6">
+      <stop stop-color="#b79bff" stop-opacity=".55"/><stop offset="1" stop-color="#b79bff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="100" cy="150" rx="64" ry="14" fill="#0a0818"/>
+  <!-- ilha -->
+  <path d="M100 132 L168 100 L100 70 L32 100 Z" fill="url(#vTop)"/>
+  <path d="M32 100 L100 132 L100 150 L32 116 Z" fill="#1a1436"/>
+  <path d="M168 100 L100 132 L100 150 L168 116 Z" fill="#120e2a"/>
+  <ellipse cx="100" cy="92" rx="70" ry="34" fill="url(#vGlow)"/>
+  <!-- casas -->
+  <g>
+    <path d="M84 92 l14 -7 14 7 -14 7 Z" fill="#2a2150"/>
+    <path d="M84 92 l0 12 14 7 0 -12 Z" fill="#3b2f72"/>
+    <path d="M98 99 l14 -7 0 12 -14 7 Z" fill="#221a44"/>
+    <rect x="89" y="96" width="4" height="5" fill="#ffd27a"/>
+    <rect x="101" y="96" width="4" height="5" fill="#ffd27a" opacity=".85"/>
+  </g>
+  <g>
+    <path d="M104 102 l12 -6 12 6 -12 6 Z" fill="#33285f"/>
+    <path d="M104 102 l0 11 12 6 0 -11 Z" fill="#241c48"/>
+    <path d="M116 108 l12 -6 0 11 -12 6 Z" fill="#1c1538"/>
+    <rect x="119" y="105" width="3" height="4" fill="#ffd27a"/>
+  </g>
+  <path d="M70 100 l10 -5 0 8 -10 5 Z" fill="#2a2150"/>
+  <rect x="73" y="98" width="3" height="4" fill="#ffce6e"/>
+</svg>
