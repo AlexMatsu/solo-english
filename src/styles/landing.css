@@ -8,6 +8,7 @@
   background: var(--panel); border: 2px solid var(--ground); margin-left: -10px; box-shadow: 0 0 0 1px var(--line-red);
 }
 .avatar-stack:first-child { margin-left: 0; }
+.avatar-stack img { width: 26px; height: 26px; object-fit: contain; filter: drop-shadow(0 0 5px var(--glow)); }
 
 .hero-aura {
   position: absolute; inset: auto; top: 50%; left: 50%; transform: translate(-50%, -50%);
@@ -145,7 +146,7 @@
   .testi-grid,
   .plans {
     display: flex; flex-direction: row; flex-wrap: nowrap; align-items: stretch;
-    overflow-x: auto; scroll-snap-type: x mandatory;
+    overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory;
     gap: 14px; margin: 0 -24px;
     scrollbar-width: none;
     max-width: none;
@@ -170,4 +171,167 @@
   }
 
   .jsep { display: none; }
+
+  /* Planos menores no mobile (estavam grandes demais) */
+  .plans > .panel { flex: 0 0 74%; max-width: 74%; padding: 22px !important; }
+  .plans > .panel > h3.display { font-size: 20px !important; }
+  .plans > .panel > div.display { font-size: 34px !important; margin: 6px 0 !important; }
+  .plans > .panel .chip { left: 22px !important; }
+  .plans > .panel .plan-list li { font-size: 13.5px; padding: 7px 0; }
+  .plans > .panel .btn.lg { padding: 12px; font-size: 14px; }
 }
+
+/* =========================================================
+   SUA JORNADA DE EVOLUÇÃO (seção "como funciona" reformulada)
+   ========================================================= */
+.journey-evo .wrap { display: flex; flex-direction: column; gap: 30px; }
+
+/* — Cabeçalho + card de progresso — */
+.je-top { display: block; }
+.je-eyebrow::before { content: "\25C6"; margin-right: 8px; color: var(--accent); }
+.je-title {
+  font-size: clamp(32px, 5vw, 56px); line-height: .95;
+  text-transform: uppercase; font-style: italic; margin-top: 6px;
+}
+.je-title .r { color: var(--accent); text-shadow: 0 0 26px var(--glow); }
+.je-sub { color: var(--muted); font-size: 17px; margin-top: 14px; max-width: 460px; }
+
+.je-progress { padding: 20px 24px; }
+.je-prog-row { display: flex; align-items: center; gap: 14px; margin: 14px 0 12px; }
+.je-lvl.hex { width: 46px; height: 52px; flex: 0 0 auto; }
+.je-lvl .ic {
+  font-size: 13px; font-weight: 700; color: #fff;
+  font-family: "Oswald", sans-serif; font-style: italic; letter-spacing: .3px;
+}
+.je-bar { flex: 1; height: 12px; }
+.je-pct { font-size: clamp(22px, 3vw, 30px); line-height: 1; }
+.je-next { color: var(--muted); font-size: 14px; }
+.je-next b { color: var(--accent-3); }
+
+/* — Corpo: personagem + cards — */
+.je-body { display: grid; grid-template-columns: 248px 1fr; gap: 28px; align-items: stretch; }
+
+.je-char { display: flex; flex-direction: column; gap: 16px; }
+.je-char-img {
+  flex: 1; min-height: 380px; border-radius: 16px; position: relative;
+  background: url("/hero-bg.png") 72% 18% / cover no-repeat;
+  border: 1px solid var(--line-red);
+  box-shadow: 0 0 44px -12px var(--glow-soft);
+}
+.je-char-img::after {
+  content: ""; position: absolute; inset: 0; border-radius: 16px;
+  background: linear-gradient(180deg, transparent 45%, rgba(7,6,15,.6));
+}
+.je-quote { padding: 18px 20px 20px; position: relative; }
+.je-quote-mark {
+  position: absolute; top: 8px; left: 14px; font-size: 46px; line-height: 1;
+  color: var(--accent); opacity: .45; font-family: Georgia, serif;
+}
+.je-quote-name { display: block; color: var(--accent-3); font-size: 15px; font-weight: 700; margin: 0 0 6px 28px; }
+.je-quote p { color: var(--muted); font-size: 13px; line-height: 1.6; }
+
+/* — Cards numerados — */
+.je-steps { display: flex; align-items: stretch; }
+.je-card {
+  flex: 1 1 0; min-width: 0; margin-top: 20px; padding: 26px 18px 0;
+  display: flex; flex-direction: column; text-align: center;
+}
+.je-num {
+  position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+  width: 40px; height: 40px; display: grid; place-items: center; z-index: 3;
+  font-size: 15px; color: var(--accent-3); font-style: italic;
+}
+.je-num::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, #1b1736, #131126);
+  border: 1px solid var(--accent); border-radius: 8px;
+  transform: rotate(45deg); box-shadow: 0 0 18px -4px var(--glow);
+}
+.je-card-icon {
+  height: 116px; display: grid; place-items: center; margin: 6px 0 16px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: radial-gradient(circle at 50% 42%, var(--glow-soft), transparent 72%);
+}
+.je-card-icon img { width: 74px; height: 74px; object-fit: contain; filter: drop-shadow(0 0 14px var(--glow)); }
+.je-card h4 { font-size: 17px; text-transform: uppercase; font-style: italic; margin-bottom: 8px; }
+.je-card > p { color: var(--muted); font-size: 13.5px; line-height: 1.5; flex: 1; }
+
+.je-reward {
+  margin: 16px -18px 0; padding: 14px 14px 18px;
+  border-top: 1px solid var(--line);
+  background: linear-gradient(180deg, transparent, var(--glow-soft));
+  border-radius: 0 0 var(--r) var(--r);
+}
+.je-reward-title {
+  font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--accent-3); font-weight: 700; margin-bottom: 10px;
+}
+.je-reward-items {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px; min-height: 64px; /* mesma altura mesmo com 1 ou 2 recompensas */
+}
+.je-reward-item { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: var(--text); }
+.je-reward-item img { width: 26px; height: 26px; object-fit: contain; filter: drop-shadow(0 0 6px var(--glow)); }
+
+.je-arrow {
+  flex: 0 0 auto; align-self: center; color: var(--accent); font-size: 22px;
+  padding: 0 4px; filter: drop-shadow(0 0 8px var(--glow));
+}
+
+/* — Faixa de CTA — */
+.je-cta { display: flex; align-items: center; justify-content: center; gap: 24px; padding: 22px 28px; }
+.je-cta-deco { width: 56px; height: 56px; object-fit: contain; opacity: .9; filter: drop-shadow(0 0 10px var(--glow)); flex: 0 0 auto; }
+.je-cta-q { font-size: clamp(17px, 2.3vw, 26px); text-transform: uppercase; font-style: italic; text-align: center; }
+.je-cta-btn { white-space: nowrap; }
+
+@media (max-width: 900px) {
+  .je-top { grid-template-columns: 1fr; align-items: start; gap: 22px; }
+  .je-body { grid-template-columns: 1fr; }
+  .je-char-img { min-height: 200px; }
+  .je-steps { flex-direction: column; }
+  .je-card { margin-top: 20px; }
+  .je-arrow { transform: rotate(90deg); padding: 8px 0; align-self: center; }
+  .je-cta { flex-direction: column; gap: 16px; }
+  .je-cta-deco { display: none; }
+}
+
+/* ===== Animações da seção "Sua jornada de evolução" ===== */
+
+/* A barra de progresso "preenche" quando o card entra na viewport.
+   O width padrão (25%) cobre os casos sem JS / reduced-motion; o keyframe
+   anima a partir de 0 quando o card é revelado (.in). */
+.je-progress.in .je-bar > i { animation: je-fill 1.3s .35s cubic-bezier(.22,.7,.2,1) forwards; }
+@keyframes je-fill { from { width: 0; } to { width: 25%; } }
+
+/* O % conta a atenção com um leve pulso de brilho ao revelar */
+.je-progress.in .je-pct { animation: je-pct-pop .6s .9s cubic-bezier(.2,1.5,.4,1) both; }
+@keyframes je-pct-pop {
+  0% { opacity: .2; transform: scale(.7); }
+  60% { transform: scale(1.12); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Losangos numerados dão um "pop" + brilho ao revelar o card */
+.je-card.in .je-num { animation: je-num-pop .55s cubic-bezier(.2,1.5,.4,1) both; }
+.je-card:nth-child(3).in .je-num { animation-delay: .12s; }
+.je-card:nth-child(5).in .je-num { animation-delay: .24s; }
+.je-card:nth-child(7).in .je-num { animation-delay: .36s; }
+@keyframes je-num-pop {
+  0% { opacity: 0; transform: translateX(-50%) rotate(-30deg) scale(.4); }
+  70% { transform: translateX(-50%) rotate(6deg) scale(1.1); }
+  100% { opacity: 1; transform: translateX(-50%) rotate(0) scale(1); }
+}
+
+/* Ícone de cada card flutua suavemente (loop), com defasagem por posição */
+.je-card-icon img { animation: je-float 4s ease-in-out infinite; }
+.je-card:nth-child(3) .je-card-icon img { animation-delay: .5s; }
+.je-card:nth-child(5) .je-card-icon img { animation-delay: 1s; }
+.je-card:nth-child(7) .je-card-icon img { animation-delay: 1.5s; }
+@keyframes je-float {
+  0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 14px var(--glow)); }
+  50% { transform: translateY(-7px); filter: drop-shadow(0 8px 20px var(--glow)); }
+}
+
+/* As setas pulsam sugerindo o avanço entre as etapas */
+.je-arrow { animation: je-arrow-pulse 1.9s ease-in-out infinite; }
+@keyframes je-arrow-pulse { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }

@@ -9,7 +9,10 @@ import { useEffect } from "react";
  */
 const SELECTORS = [
   ".section-head",
-  ".jstep",
+  ".je-head",
+  ".je-progress",
+  ".je-char",
+  ".je-card",
   ".cols-3 > .panel",
   ".reward",
   ".mission",

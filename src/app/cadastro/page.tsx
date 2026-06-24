@@ -4,6 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+import {
+  IconUser,
+  IconMail,
+  IconLock,
+  IconSword,
+  IconTrophy,
+  IconBot,
+} from "@/components/icons";
 
 const COLORS = {
   weak: "var(--accent)",
@@ -199,11 +207,11 @@ export default function CadastroPage() {
             >
               <span
                 style={{
-                  fontSize: 20,
+                  color: "var(--accent-3)",
                   filter: "drop-shadow(0 0 8px var(--glow))",
                 }}
               >
-                ⚔️
+                <IconSword width={22} height={22} />
               </span>
               <span>
                 <b>Missões diárias</b>
@@ -223,11 +231,11 @@ export default function CadastroPage() {
             >
               <span
                 style={{
-                  fontSize: 20,
+                  color: "var(--accent-3)",
                   filter: "drop-shadow(0 0 8px var(--glow))",
                 }}
               >
-                🏆
+                <IconTrophy width={22} height={22} />
               </span>
               <span>
                 <b>Ranking mundial</b>
@@ -247,11 +255,11 @@ export default function CadastroPage() {
             >
               <span
                 style={{
-                  fontSize: 20,
+                  color: "var(--accent-3)",
                   filter: "drop-shadow(0 0 8px var(--glow))",
                 }}
               >
-                🤖
+                <IconBot width={22} height={22} />
               </span>
               <span>
                 <b>Tutor de IA</b>
@@ -288,8 +296,12 @@ export default function CadastroPage() {
               <div className="confirm-mail-orb">
                 <span className="confirm-mail-ring" aria-hidden="true"></span>
                 <span className="confirm-mail-ring delay" aria-hidden="true"></span>
-                <span className="confirm-mail-icon" aria-hidden="true">
-                  ✉️
+                <span
+                  className="confirm-mail-icon"
+                  aria-hidden="true"
+                  style={{ color: "#2ecc71" }}
+                >
+                  <IconMail width={44} height={44} strokeWidth={1.6} />
                 </span>
                 <span className="confirm-mail-check" aria-hidden="true">
                   ✓
@@ -346,7 +358,7 @@ export default function CadastroPage() {
               <label htmlFor="nome">Nome de aventureiro</label>
               <div className="input-wrap">
                 <span className="lead" aria-hidden="true">
-                  🧙
+                  <IconUser />
                 </span>
                 <input
                   className={`input${nomeErr ? " err" : ""}`}
@@ -369,7 +381,7 @@ export default function CadastroPage() {
               <label htmlFor="email">E-mail</label>
               <div className="input-wrap">
                 <span className="lead" aria-hidden="true">
-                  ✉
+                  <IconMail />
                 </span>
                 <input
                   className={`input${emailErr ? " err" : ""}`}
@@ -392,7 +404,7 @@ export default function CadastroPage() {
               <label htmlFor="senha">Senha</label>
               <div className="input-wrap">
                 <span className="lead" aria-hidden="true">
-                  🔒
+                  <IconLock />
                 </span>
                 <input
                   className={`input${senhaErr ? " err" : ""}`}
@@ -480,17 +492,6 @@ export default function CadastroPage() {
               </p>
             ) : null}
           </form>
-
-          <div className="divider">ou continue com</div>
-
-          <div className="social-btns">
-            <button type="button" className="social-btn">
-              🔴 Google
-            </button>
-            <button type="button" className="social-btn">
-              🎮 Discord
-            </button>
-          </div>
 
           <p className="auth-foot">
             Já tem conta? <Link href="/login">Entrar</Link>

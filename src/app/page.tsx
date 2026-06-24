@@ -35,13 +35,17 @@ const MISSION_ROWS = [
   { icon: "trilha_aprendizado/speaking", reward: "+100 XP", prog: "0/1" },
   { icon: "recursos_topo/streak", reward: "+200 XP", prog: "5/7", done: true },
 ];
-const JOURNEY_ICONS = ["classes/warrior", "menu/missoes", "recursos_topo/xp", "recursos_topo/nivel"];
+const JOURNEY = [
+  { icon: "classes/warrior", rewardIcons: ["recompensas_epicas/avatares"] },
+  { icon: "missoes/desafios", rewardIcons: ["recompensas_epicas/moedas", "recursos_topo/xp"] },
+  { icon: "recursos_topo/xp", rewardIcons: ["recompensas_epicas/bau_epico"] },
+  { icon: "ranking_liga/lendario", rewardIcons: ["recursos_topo/mundo", "recompensas_epicas/titulos"] },
+];
 const TESTI = [
   { icon: "rubi", name: "Lucas T.", lvl: "32", tier: "Elite" },
   { icon: "diamante", name: "Mariana S.", lvl: "45", tier: "Master" },
   { icon: "ouro", name: "Gabriel M.", lvl: "28", tier: "Warrior" },
 ];
-const FEAT_ICONS = ["missoes/desafios", "trilha_aprendizado/reading", "menu/guilda", "botoes_elementos/lock"];
 
 export default function Home() {
   const t = useT();
@@ -86,10 +90,11 @@ export default function Home() {
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: 30 }}>
               <div style={{ display: "flex" }}>
-                <span className="avatar-stack">🧝</span>
-                <span className="avatar-stack">🥷</span>
-                <span className="avatar-stack">🧛</span>
-                <span className="avatar-stack">⚔️</span>
+                {["warrior", "mage", "ranger", "hunter"].map((c) => (
+                  <span className="avatar-stack" key={c}>
+                    <img src={`/icons/classes/${c}.svg`} alt="" aria-hidden="true" />
+                  </span>
+                ))}
               </div>
               <p style={{ fontSize: 14, color: "var(--muted)" }}>
                 <b style={{ color: "var(--text)" }}>{t.hero.advNum}</b><br />
@@ -100,28 +105,59 @@ export default function Home() {
         </div>
       </section>
 
-      {/* COMO FUNCIONA */}
-      <section id="como" className="section alt">
+      {/* COMO FUNCIONA — Sua jornada de evolução */}
+      <section id="como" className="section alt journey-evo">
         <div className="wrap">
-          <div className="section-head">
-            <p className="eyebrow">{t.journey.eyebrow}</p>
-            <h2>{t.journey.titlePre} <span className="r">{t.journey.titleHi}</span></h2>
+          {/* Cabeçalho */}
+          <div className="je-top">
+            <div className="je-head">
+              <p className="eyebrow je-eyebrow">{t.journey.eyebrow}</p>
+              <h2 className="display je-title">
+                {t.journey.titlePre} <span className="r">{t.journey.titleHi}</span>
+              </h2>
+              <p className="je-sub">{t.journey.subtitle}</p>
+            </div>
           </div>
-          <Carousel className="journey">
-            {t.journey.steps.map((step, i) => (
-              <Fragment key={i}>
-                {i > 0 ? <span className="jsep" aria-hidden="true">→</span> : null}
-                <div className="jstep">
-                  <div className="hex svg-badge">
-                    <img className="ic-img" src={`/icons/${JOURNEY_ICONS[i]}.svg`} alt="" aria-hidden="true" />
-                    <span className="num">{String(i + 1).padStart(2, "0")}</span>
-                  </div>
-                  <h4 className="display">{step.t}</h4>
-                  <p>{step.d}</p>
-                </div>
-              </Fragment>
-            ))}
-          </Carousel>
+
+          {/* Corpo: personagem + cards */}
+          <div className="je-body">
+            <aside className="je-char">
+              <div className="je-char-img" role="img" aria-label="Kai, o caçador" />
+              <blockquote className="je-quote panel glow">
+                <span className="je-quote-mark" aria-hidden="true">&ldquo;</span>
+                <b className="je-quote-name">{t.journey.quoteName}</b>
+                <p>{t.journey.quote}</p>
+              </blockquote>
+            </aside>
+
+            <div className="je-steps">
+              {t.journey.steps.map((step, i) => (
+                <Fragment key={i}>
+                  {i > 0 ? <span className="je-arrow" aria-hidden="true">→</span> : null}
+                  <article className="je-card panel glow">
+                    <span className="je-num display">{String(i + 1).padStart(2, "0")}</span>
+                    <div className="je-card-icon">
+                      <img src={`/icons/${JOURNEY[i].icon}.svg`} alt="" aria-hidden="true" />
+                    </div>
+                    <h4 className="display">{step.t}</h4>
+                    <p>{step.d}</p>
+                    <div className="je-reward">
+                      <p className="je-reward-title">{t.journey.rewardTitle}</p>
+                      <div className="je-reward-items">
+                        {step.rewards.map((r, j) => (
+                          <span className="je-reward-item" key={r}>
+                            <img src={`/icons/${JOURNEY[i].rewardIcons[j]}.svg`} alt="" aria-hidden="true" />
+                            {r}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </article>
+                </Fragment>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -288,20 +324,6 @@ export default function Home() {
               {t.cta.button} <span className="arrow">→</span>
             </span>
           </Link>
-        </div>
-      </section>
-
-      {/* DIFERENCIAIS */}
-      <section className="section" style={{ padding: "48px 0" }}>
-        <div className="wrap cols-4">
-          {t.feat.map((f, i) => (
-            <div className="feat" key={i}>
-              <span className="hex svg-badge" style={{ width: 54, height: 60 }}>
-                <img className="ic-img" src={`/icons/${FEAT_ICONS[i]}.svg`} alt="" aria-hidden="true" />
-              </span>
-              <div><b>{f.t}</b><p>{f.d}</p></div>
-            </div>
-          ))}
         </div>
       </section>
 

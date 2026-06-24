@@ -56,6 +56,7 @@ export default function LoginPage() {
     }
 
     setSuccess(true);
+    sessionStorage.setItem("welcomeBack", "1");
     router.push("/jornada");
   };
 
@@ -100,55 +101,6 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* HUD preview: nível / streak */}
-        <div
-          className="panel glow corner"
-          style={{ padding: 22, position: "relative", zIndex: 2, maxWidth: 320 }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
-            }}
-          >
-            <div>
-              <div
-                style={{
-                  fontSize: 11,
-                  color: "var(--muted)",
-                  letterSpacing: 1,
-                }}
-              >
-                NÍVEL
-              </div>
-              <div
-                className="display"
-                style={{ fontSize: 44, color: "#fff", lineHeight: 0.8 }}
-              >
-                24
-              </div>
-            </div>
-            <span className="chip">🔥 Streak 7 dias</span>
-          </div>
-          <div style={{ margin: "18px 0 4px" }}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                fontSize: 12,
-                color: "var(--muted)",
-                marginBottom: 8,
-              }}
-            >
-              <span>XP</span>
-              <span className="mono">2.450 / 3.000</span>
-            </div>
-            <div className="xpbar">
-              <i style={{ width: "81%" }}></i>
-            </div>
-          </div>
-        </div>
       </aside>
 
       {/* Formulário */}

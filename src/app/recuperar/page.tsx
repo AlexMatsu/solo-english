@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { IconMail, IconShield } from "@/components/icons";
 
 export default function RecuperarPage() {
   const [email, setEmail] = useState("");
@@ -77,7 +78,15 @@ export default function RecuperarPage() {
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <span style={{ fontSize: 26 }}>🛡️</span>
+            <span
+              style={{
+                color: "var(--accent-3)",
+                filter: "drop-shadow(0 0 8px var(--glow))",
+                flex: "0 0 auto",
+              }}
+            >
+              <IconShield width={26} height={26} />
+            </span>
             <p style={{ fontSize: 13, color: "var(--muted)" }}>
               Dica: confira a pasta de{" "}
               <b style={{ color: "var(--text)" }}>spam</b> caso o link demore a
@@ -106,7 +115,7 @@ export default function RecuperarPage() {
                   <label htmlFor="email">E-mail</label>
                   <div className="input-wrap">
                     <span className="lead" aria-hidden="true">
-                      ✉
+                      <IconMail />
                     </span>
                     <input
                       className={`input${emailErr ? " err" : ""}`}
@@ -125,8 +134,10 @@ export default function RecuperarPage() {
                   {emailErr ? <p className="hint error">{emailErr}</p> : null}
                 </div>
 
-                <button type="submit" className="btn block lg">
-                  Enviar link de recuperação <span className="arrow">→</span>
+                <button type="submit" className="btn block lg btn-bolt">
+                  <span className="btn-bolt-label">
+                    Enviar link de recuperação <span className="arrow">→</span>
+                  </span>
                 </button>
               </form>
 
@@ -139,12 +150,14 @@ export default function RecuperarPage() {
             <div style={{ textAlign: "center" }}>
               <div
                 style={{
-                  fontSize: 56,
+                  color: "var(--accent)",
                   filter: "drop-shadow(0 0 18px var(--glow))",
                   marginBottom: 8,
+                  display: "flex",
+                  justifyContent: "center",
                 }}
               >
-                📩
+                <IconMail width={56} height={56} strokeWidth={1.5} />
               </div>
               <h1>
                 Link <span className="r">enviado!</span>

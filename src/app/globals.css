@@ -405,17 +405,24 @@ img { max-width: 100%; display: block; }
 .steps-strength span { flex: 1; height: 4px; border-radius: 100px; background: #1c1c28; transition: background .3s; }
 
 /* ===== Background imersivo da hero ===== */
-.hero-bg { position: relative; isolation: isolate; }
+.hero-bg {
+  position: relative; isolation: isolate;
+  /* preenche a tela em qualquer dispositivo: svh evita o "pulo"/corte da
+     barra de endereço no mobile que o 100vh causa */
+  min-height: 100svh;
+  display: flex; align-items: center;
+}
+.hero-bg > .wrap { width: 100%; }
 /* imagem fica como fallback/poster atrás do vídeo */
 .hero-bg::before {
   content: ""; position: absolute; inset: 0; z-index: -3;
   background:
-    url("/hero-bg.png") right 18% / cover no-repeat;
+    url("/hero-bg.png") right top / cover no-repeat;
 }
 /* vídeo de fundo da hero */
 .hero-video {
   position: absolute; inset: 0; z-index: -2; pointer-events: none;
-  width: 100%; height: 100%; object-fit: cover; object-position: right 18%;
+  width: 100%; height: 100%; object-fit: cover; object-position: right top;
 }
 /* véu escuro: forte à esquerda (legibilidade do texto), transparente à direita */
 .hero-bg::after {
